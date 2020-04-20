@@ -14,61 +14,7 @@ class myRedis{
         this.snapshot_interval = config.snapshot_interval;
     }
     
-    get_commands(){
-        var to_return = new Map();
-        to_return['GET'] = this.f_get;
-        to_return['SET'] = this.f_set,
-        to_return['DEL'] = this.f_del;           
-        to_return['FLUSHALL'] = this.f_flushall;
-        to_return['MGET'] = this.f_mget;
-        to_return['MSET'] = this.f_mset;
-        to_return['EXPIRE'] = this.f_expire;
-        to_return['SETEX'] = this.f_setex;
-        to_return['TTL'] = this.f_ttl;
-        to_return['INCR'] = this.f_incr; 
-        to_return['DECR'] = this.f_decr; 
-        to_return['RENAME'] = this.f_rename;
-        to_return['APPEND'] = this.f_append;
-        to_return['EXISTS'] = this.f_exists;
-        to_return['LPUSH'] = this.f_lpush;
-        to_return['RPUSH'] = this.f_rpush;
-        to_return['LRANGE'] = this.f_lrange;
-        to_return['LPOP'] = this.f_lpop;
-        to_return['RPOP'] = this.f_rpop;
-        to_return['LLEN'] = this.f_llen;
-        to_return['SADD'] = this.f_sadd;
-        to_return['SISMEMBER'] = this.f_sismember;
-        to_return['SMEMBERS'] = this.f_smembers;
-        to_return['SCARD'] = this.f_scard;
-        to_return['ZADD'] = this.f_zadd;
-        to_return['ZRANGE'] = this.f_zrange;
-        to_return['ZRANK'] = this.f_zrank;
-        
-        return to_return;
-    }
-
-    executeCommand(query){
-        if(query.toUpperCase() == "PING"){
-            return "PONG";
-        }
-        query = query.split(" ");
-        var cmd = query[0].toUpperCase();
-        
-        if(cmd in this._commands)
-            var to_return = this._commands[cmd].call(this, ...query.slice(1));
-        else
-            throw "Command not found";
-
-        if(to_return == undefined){
-            throw "Item not found";
-        }
-
-        if(typeof to_return == 'object'){
-            return to_return;
-        }else{
-            return '"' + to_return + '"';
-        }
-    }
+    
     get_commands(){
         var to_return = new Map();
         to_return['GET'] = this.f_get;
