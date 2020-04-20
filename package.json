@@ -1,0 +1,17 @@
+{
+  "name": "redis-custom-app",
+  "version": "1.0.0",
+  "description": "This is a custom app with redis-like functionality",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Himansh Jain",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "colors": "^1.4.0",
+    "mongodb": "^3.5.6"
+  }
+}
