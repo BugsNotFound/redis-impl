@@ -97,13 +97,13 @@ Data is backed up in file system at regular intervals as specified in the config
 Redis is generally known as a single-process, single-thread model. This is not true. Redis also runs multiple backend threads to perform backend cleaning works, such as cleansing the dirty data and closing file descriptors. In Redis, the main thread is responsible for the major tasks, including but not limited to: receiving the connections from clients, processing the connection read/write events, parsing requests, processing commands, processing timer events, and synchronizing data. Only one CPU core runs a single process and single thread.
 Therefore I chose Javascript as the primary programming language for this project as it has a single threaded event loop and uses separate worker threads for file operations and hence doesn't block the main event loop (enabling it to scale better to multiple requests).
 
-
+##
 **Q:** Improvement Scope?
 
 **A:**
 Current version is a CLI and persists backup on file system. In future it'll be extended to a Server API with backup persisting on scalable DB.  
 
-
+##
 **Q:** Data Structure Used?
 
 **A:**
@@ -111,7 +111,7 @@ Array,
 Set,
 Hashmap
 
-
+##
 **Q:** Async Operations (multithreading)?
 
 **A:** nodeJs provides worker thread pool for async operations. Using this functionality I implemented intermittent backup function to run on a separate thread of execution so as to not block the main event loop. After regular snapshot intervals (as specified in the config file), javascript spawns a separate worker thread to write the data in a json in file system. This thread executes parallel to the primary event loop (Simultaneous multithreading) and doesn't block the user from interacting with the CLI.  
